@@ -1,0 +1,326 @@
+\documentclass[12pt]{article}% YOUR INPUT FILE MUST CONTAIN
+\usepackage{textgreek}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage{algorithm}
+\usepackage{mathrsfs}
+\usepackage[noend]{algpseudocode}
+\usepackage{multicol,lipsum}
+\usepackage[linguistics]{forest}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{listings}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand{\myrightarrow}[1]{\xrightarrow{\makebox[2em][c]{$\scriptstyle#1$}}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+\usepackage{float}
+\lstset{language=Python}
+
+
+\begin{document}
+
+
+\title{Death Matters: Endogenous Mortality and Economic Growth}
+\author{Kobi Finestone, Donald Moratz and Snigdha Sharma}
+\date{December 10th, 2018}
+\maketitle
+
+\underline{1 Introduction}
+
+	In so far as population growth is a determinant of economic growth, mortality must be a determinant of economic growth. This follows naturally from the fact that population growth is itself a function of mortality. Despite the importance of mortality in driving economic growth, there has been little to no work on endogenous mortality models. Part of this is likely due to the fact that some portion of mortality is fundamentally outside of our control. People die whether we want them to or not. However, simply because we cannot completely control mortality does not entail that it ought to be treated as exogenous. In fact, much of human activity is devoted precisely to the task of endogenizing mortality. We toil to avoid death and, besides modern sanitation, the most effective means we have developed is healthcare. 
+
+	When economic agents invest in healthcare, they do so in order to prevent an untimely death. This simple fact explains the large investments in healthcare the world over. Given that economic agents do in fact endogenize mortality, it seems fitting that endogenous growth models should likewise capture this endogenous relationship between healthcare investment and mortality. Despite its intuitive appeal, much of the work on endogenous growth theory has eschewed endogenous mortality models. In fact, when the growth rate is endogenized, it is usually births which are deemed endogenous, relegating mortality to an exogenous force. We have reversed this picture. This is not because we deem attempts to endogenize births as wrongheaded, but simply in order to maintain a manageable level of tractability of the model. We hope to extend our model in the future towards both endogenous births and endogenous deaths, but for now will focus only on the latter issue. As we will demonstrate, an endogenous account of mortality that incorporates healthcare investment will yield an important insight into the relationship between economic growth and population growth. Attempts to stave off the inevitable can successfully prolong life but come at a cost. Namely, the reduction in non-healthcare investment, which can have retarding effect on growth. The trick is to balance a reduction in mortality and a strong growth rate. Our model will effectively capture this trade-off and offer insight into how best to manage these competing goals. 
+
+	In this paper, we will first review the scant literature surround the endogenization of mortality within the context of economic growth models. Proceeding from there, we will introduce several models to examine the relationship between death and economic outcomes. We will begin with a generic Solow model with a representative agent and exogenous population dynamics. We will then proceed into a Solow model with endogenous population dynamics that will demonstrate the limits of using such an exogenous growth model. Finally, we will conclude with our proposed model which uses endogenous mortality as well as endogenous technological change as proposed in Romer (’86). We will then move our paper into a brief examination of optimization within our model done on the part of the government and a relationship between taxes, population dynamics, and growth.
+
+\underline{2 Literature Review}
+
+	The literature in endogenous growth has been for the most part silent on endogenizing mortality. There seems to be, from a survey of the literature, three main approaches to endogenous death. These are (I) Potential Extension, (II) Healthcare, and (III) Pollution. The main approach has been to propose extending existing endogenous growth models to incorporate endogenous mortality. This approach is best summarized by Barro and Sala-i-Martin who write:
+
+We [also] do not allow \textit{d} [the death rate] to depend on family or public expenditures on medical care, sanitation, and so on, although these influences on the mortality rate would be an \textit{important extension of the model.} (p.412, emphasis added)
+
+Although some could argue that simply proposing endogenous mortality as an extension is hardly an approach to modeling the phenomenon, it certainly highlights the importance of this project.
+
+	The literature has also explored the impact of healthcare on mortality. When incorporated into an endogenous growth framework, authors are able to examine the impact of household and or public expenditure on mortality rates. That being said, the literature here is quite sparse. Authors such as Leung and Wang have examined the impact of healthcare on life expectancy and traced this relationship for its impact on growth (Leung and Wang, 2010). However, this project has been done within a neoclassical growth framework. Others, such as Kalemli-Ozcan have explored similar dynamics but within a partial equilibrium context (Kalemli-Ozcan, 2000). The result is that there has been a paucity of work on endogenous mortality within an endogenous general equilibrium framework.
+
+	The final avenue of research on endogenous mortality has been motivated by pollution. As pollution is taken to be, at least partially, within the control of individuals and governments as well as a determinant of mortality, it has been considered a viable pathway for endogenizing death. Reis explores the possibility of eliminating pollution all together given hoped for technological advances. She then explores the impact of this breakthrough on growth, in part via a reduced mortality rate (Reis, 2001). Peretto and Valente trace the impact of growth on pollution and then the feedback loop in which increased pollution increases mortality (Peretto and Valente, working paper).
+
+	What becomes clear from a survey of the literature is that it is possible to endogenize mortality by at least two different avenues: healthcare and pollution. What unifies these approaches is that they are within the control of relevant economic agents, be they private or governmental. An interesting possible extension suggested by the literature would be to combine healthcare and pollution into a single model of endogenous mortality. Pollution, caused by economic growth, increases mortality thus spurring the need for increased investment in healthcare. This in turn will have an effect on growth, thus changing the development of pollution within an economy. At present, no model has explored the interrelations between these two endogenizing pathways. For the present, we have focused exclusively on healthcare, but that does not mean that pollution is ever far from our minds.
+
+\underline{3 The Model}
+
+We have constructed a one-sector dynamic general equilibrium model which produces a commodity using labor and capital. These inputs are supplied by identical households which face an intertemporal choice between labor and leisure. All labor is directly supplied to firms and firms rent assets directly from households as capital. In order to ensure the proper functioning of intertemporal choices, we have included a financial market into the model. For simplicity we have normalized the price of consumption, investment, and output to 1. Employing a representative agent model, all identical individuals are endowed with time, initial wealth, and the ability to perform labor. All wages are determined endogenously through the model via the relationship between utility of consumption and utility derived from leisure. Population growth is a non-linear function of population and mortality. In the second model, endogenized mortality is controlled by healthcare investment by the government funded by a wage tax. The representative firm follows the Solow (’57) model of exogenous technological change. After demonstrating the inherent shortcomings of a Solow approach to growth models, we move the math into an endogenous growth model based on the framework proposed by Romer (’86). Our models generate market clearing equilibria when they reach the steady-state.
+
+%Equation 01
+\begin{equation}
+P_{C} = P_{I} = P_{Y} = 1
+\end{equation}
+
+\underline{3.1 Base Model}
+	In this section we will introduce three models to examine the role of mortality in economic growth. Our first model will be a basic model with exogenous mortality. We will then introduce an endogenous component in the form of health care, but within the context of an exogenous growth model. The results of this will demonstrate the necessity of incorporating endogenous growth such as the model proposed by Romer (’86), which will form our final proposed model. 
+
+\underline{3.11 The Household}
+\underline{3.111 Population Dynamics}
+
+We employ a generic model of population growth which is determined by population, birthrate, and mortality. This is represented as:
+
+%Equation 02
+\begin{equation}
+\dot{L} / L = m(L,n,d)
+\end{equation}
+
+In this equation L represents the labor force for the economy and N represents the total population. Importantly we have set L = N, thereby making all members of the population workers in the economy. This assumption removes differences associated with age and life-stages as we have erased childhood and retirement. The variable n represents the constant exogenous birth rate and d represents the endogenous death rate, which maintains an exogenous component. 
+	The endogenous death rate is a function of healthcare investment. As healthcare investment increases, the good Health increases. Note, that in model one, Health is a good belonging to each individual, denoted by h. For reasons of tractability, we have normalized the price of h to one. This increase in h causes a decrease in the death rate d, but with diminishing marginal returns. Thus, in so far as healthcare investment is determined within the model, the death rate is endogenous. In the Exogenous Wage Tax Model, healthcare investment will be funded by the government which will produce h using tax revenue. As such, in the Base Model, we can treat d as exogenous while in the Exogenous Wage Tax Model it becomes endogenous.
+
+%Equation 02.1
+\begin{equation}
+d = \phi - \psi(h)
+\end{equation}
+
+
+%Equation 2.2
+\begin{equation}
+\dot{L} = nL(1-L/M) -dL
+\end{equation}
+
+%Equation 03
+\begin{equation}
+U=\int_{0}^{\infty} e^{-(\rho)t}   U(c,1-l) dt
+\end{equation}
+
+%Equation 04 labour fraction
+\begin{equation}
+ 0 \leq l \leq 1
+\end{equation}
+
+%Equation 05 Budget Constratint
+\begin{equation}
+\dot{a} = [r - m(L,n ,d)]a + wl -c
+\end{equation}
+
+% Equation 06 solvency constraint 
+\begin{equation}
+a_{0} > 0
+\end{equation}
+
+%Equation 07 TVC
+\begin{equation}
+\lim_{t\to\infty} a(t) e^{-\int_{0}^{t} [r(v)-n] dv} \geq 0
+\end{equation}
+
+%Sentence 01 MUC conunsumption 
+MU_{c} > 0  at an increasing rate \\
+MU_{c} = 0 at c = 0 \\
+MU_{c} =\infty at c = \infty
+
+%Equation 08 PVH
+\begin{equation}
+PVH=\int_{0}^{\infty} e^{-(\rho)t}   U(c,1-l) dt + \alpha([r - m(L,n ,d)]a + wl -c)
+\end{equation}
+
+%Equation 09 Labor ss
+\begin{equation}
+U_{c}/U_{1-l} = 1/w
+\end{equation}
+
+%Equation 10 consumption path
+\begin{equation}
+r = \rho + \dot{c}/c
+\end{equation}
+
+%Sentence 02 roi
+Let the average rate of interest in a period be denoted by $\bar{r}_{t} = 1/t \int_{0}^{t} r(s) ds$
+
+%Equation 11 forward Integration
+\begin{equation}
+c_{(t)} = c_{(0)} e^{(\bar{r}_{t} - \rho)t}
+\end{equation}
+
+% Equation 12 PDV
+\begin{equation}
+c_{(0)} = \mu_{(0)} (a_{(0)} + b_{(0)})
+\end{equation}
+where $a_{(0)}$ is initial wealth, \\
+ $b_{(0)}$ is human wealth denoted by $\int_{0}^{\infty} e^{-\bar{r}_{t}t} - m(L,n,d)]t w_{t} l_{t} dt$, \\
+and $\mu_{(0)}$ is the marginal propensity to consume out of wealth represented as $1/\mu_{(0)} = \int_{0}^{\infty} e^{-\rho t} - m(L,n ,d)]  t dt$
+
+%Equation 13 Production function
+\begin{equation}
+Y = F(K,XL)
+\end{equation}
+
+%Equation 14 X
+\begin{equation}
+\dot{X}/X = x
+\end{equation}
+
+%Equation 15 K dep
+\begin{equation}
+\dot{K} = I - \delta K
+\end{equation}
+
+%Equation 16 CVH
+\begin{equation}
+CVH = F(K,XL) -wL - I + q(I -  \delta K)
+\end{equation}
+
+%Equation 17 Firm TVC 
+\begin{equation}
+\lim_{t\to\infty} a(t) e^{-\bar{r}_{t}} q_{(t)} K_{(t)} = 0
+\end{equation}
+
+%Equation 18 Investment demand
+\begin{equation}
+r = P_{Y} F(K,XL) /q - \delta + \dot{q}/q
+\end{equation}
+
+%Equation 19 Capital per  worker 
+\begin{equation}
+\dot{k}/k = s f(k) / k - (\delta + m(L,n ,d))
+\end{equation}
+
+%Equation 19.1 Capital per effective 
+\begin{equation}
+\dot{\tilde{k}}/\tilde k = s f(k) / \tilde k - (\delta + m(L,n ,d) + x)
+\end{equation}
+
+%Equation 20 Equilibrium
+\begin{equation}
+a = k
+\end{equation}
+
+%Sentence number 3 Steady state
+For $\dot{\tilde{k}} = 0$, $s f(k)/\tilde{k} = \delta + m(L,n ,d) + x$
+
+%Sentence 04
+$\dot{\tilde{c}}/\tilde{c} = r - \rho - x$ \\
+where $\tilde{c}$ is the consumption per effective worker \\
+$\Rightarrow$ At $\tilde{c} = 0$, $r = \rho - x$
+%Model 2 
+
+%Equation 20.1 
+\begin{equation}
+\varepsilon w = h
+\end{equation}
+
+%Equation 20.2
+\begin{equation}
+\Rightarrow d = \phi - \psi(\varepsilon w)
+\end{equation}
+
+%Equation 21 Budget Constraint
+\begin{equation}
+\dot{a} = [r - m(L,n ,d)]a + w(1- \varepsilon)l -c
+\end{equation}
+
+%Equation 22 Labor ss
+\begin{equation}
+U_{c}/U_{1-l} = 1/(1- \varepsilon)w
+\end{equation}
+
+%Equation 23 PDV
+\begin{equation}
+c_{(0)} = \mu_{(0)} (a_{(0)} + b_{(0)})
+\end{equation}
+where $a_{(0)}$ is initial wealth, \\
+ $b_{(0)}$ is human wealth denoted by $\int_{0}^{\infty} e^{-\bar{r}_{t}t} - m(L,n,d)t (1- \varepsilon) w_{t} l_{t} dt$, \\
+and $\mu_{(0)}$ is the marginal propensity to consume out of wealth represented as $1/\mu_{(0)} = \int_{0}^{\infty} e^{-\rho t} - m(L,n ,d)  t dt$
+
+%Sentence 5
+$\Delta c_{(0)}$ from model 2 $\geq \Delta c_{(0)}$ from model 1 
+
+%Equation 24 K accummalation
+\begin{equation}
+\dot{\tilde{k}}/\tilde k = s f(k) / \tilde k - (\delta + m(L,n ,d) + x + w\varepsilon l)
+\end{equation}
+
+%Sentence 6
+For $\dot{\tilde{k}} = 0$, $s f(k)/\tilde{k} = \delta + m(L,n ,d) + x + w\varepsilon l$
+
+%Senetnce 7
+At $\tilde{c} = 0$, $r = \rho - x$
+
+
+%Sentence 8
+$Y_{i} = F(K_{i}, X_{i}L_{i})$  where $i =  1, 2,....N$ represents the number of firms
+
+%Equation 25
+\begin{equation}
+X_{i} = Z_{i} + \Sigma_{i\neq j} \sigma Z_{j} 
+\end{equation}
+where $Z_{i}$ are the ideas generated by firm i, \\ $ Z_{j}$ are the stock of ideas generated by the other $N-1$ firms \\
+and $\sigma$ is the part of ideas generated by other firms used by firm i at no additional costs
+
+%Equation 26
+\begin{equation}
+\dot{Z_{i}} = \theta \dot{K_{i}}
+\end{equation}
+
+%Equaution 27
+\begin{equation}
+\dot{K_{i}} = I_{i} - \delta K_{i}
+\end{equation}
+
+%Sentence 09
+$\Rightarrow$ $X_{i} = \theta [K_{i} + \sigma \Sigma_{i\neq j} K_{j}]$
+
+%Sentence 10
+$K = \sum_{i=1}^{N} \Rightarrow K_{i} K/N = K_{i}$ 
+\\ Similarly, $L/N = L_{i}$ where  $L = \sum_{i=1}^{N} L_{i}$
+
+%Equation 28
+\begin{equation}
+\Rightarrow X_{i} = \theta K/N [1 + \sigma(N-1)]
+\end{equation}
+
+%Sentence 11
+$K = \sum_{i=1}^{N} Y_{i} = \sum_{i=1}^{N}  F (K_{i}, X_{i} L_{i})$
+
+%Equation 29
+\begin{equation}
+Y = K . F(1, \theta (1 + \sigma(N-1))L/N)
+\end{equation}
+
+%Sentence 12
+$\Rightarrow y = k . F(1, \theta (1 + \sigma(N-1))L/N)$
+
+%Sentence 13
+$\Rightarrow y = k . F(1, \theta L)$
+
+%Equation 30
+\begin{equation}
+\dot{k}/k = s F(1, \theta L) - \delta -w\varepsilon l 
+\end{equation}
+
+
+%Equation 31
+\begin{equation}
+\dot{Y} = \dot{K}F(1, \theta L) + KF_L\theta\dot{L}
+\end{equation}
+
+%Sentence 14
+Here we see that output grows related to an increase in technology, but also grows as a function of population growth, \dot{L}
+
+%Equation 32
+\begin{equation}
+d\dot{Y}/d\varepsilon = \dot{K}F_L \theta L_\varepsilon +\dot{K}_\varepsilon F + KF_L\theta \dot{L_\varepsilon}
+\end{equation}
+
+%Sentence 15
+Equation 32 suggests that the effect of changes in taxation on output will be related to three competing effects. First, the tax rate changes the amount of labor available, L_\varepsilon, and the effect of this change on capital accumulation. Second, the effect of taxes on the accumulation of capital. Finally, how the tax rate affects the rate of population growth. 
+
+%Equation 33
+\begin{equation}
+\varepislon= \frac{sY - \delta K + sF(1, \theta L) - \frac{LF(1, \theta L)}{\theta L_\varepsilon} + K\frac{\dot{L_\varepsilon}}{L_\varepsilon}}{wL + \frac{F(1, \theta L)}{\theta}}
+\end{equation}
+
+%Equation 34
+\begin{equation}
+\dot{L} = nL(1 - L/M) - dL
+\end{equation}
+
+
+\end{document}
